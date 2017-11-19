@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser')
 var Vectorizer = require('./vectorizer');
+var argv = require('minimist')(process.argv.slice(2));
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json({ type: 'application/*+json' }))
@@ -38,7 +39,7 @@ app.post('/convert', function (req, res, done) {
 	});
 });
 
-var server = app.listen(3000, function () {
+var server = app.listen(argv.p ? argv.p : 3000, function () {
   var host = server.address().address;
   var port = server.address().port;
 
